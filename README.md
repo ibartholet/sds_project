@@ -8,4 +8,3 @@ Setup Instructions: Exactly what software and libraries are required to run the 
 
 Execution Order: Clear instructions on how to run the project (e.g., “Run the data_cleaning.ipynb notebook first, followed by spatial_analysis.ipynb”).
 
-If your project relies on special local settings or manual data downloads that you fail to
