@@ -67,7 +67,7 @@ def fetch_data(map_key):
     # For reproducibility current fires will be saved in a csv-file
     df_fire.to_csv("FIRMS_fire_data_today_minus5days.csv", index = False)
 
-    return(df_fire.head(6))
+    return(df_fire)
   
   elif response.status_code == 404:
     print(f"Error 404: Page not found")
