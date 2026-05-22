@@ -1,5 +1,7 @@
 ## Load Map Key and Access Key URL ##
 
+# most of the code used in this file was copied from NASA FIRM: https://firms.modaps.eosdis.nasa.gov/content/academy/data_api/firms_api_use.html, last access: 22.05.2026
+
 import pandas as pd
 import requests
 from config import MAP_KEY
@@ -7,7 +9,7 @@ from config import MAP_KEY
 def check_map_key(map_key): 
   """
   Checks the status of the provided map key by making a request to the NASA FIRMS API.
-  It returns a dictionary, which is then converted into a pandas Series containing the status information of the map key.
+  It returns a dictionary, which contains the status information of the map key.
   
 
   Parameters
@@ -19,11 +21,13 @@ def check_map_key(map_key):
   Returns
   ----------
   dict or None
-    If the request is successful, a dicitonary containing the status information of the map key which includes 
-    transaction_limit, current_transactions, and transaction_interval is returned.
-    If the reques fails, None is returned and an error message will be printed.
+    If the request is successful, a dictionary containing the status information of the map key is returned, including:
+    - transaction_limit: maximum number of allowed transactions
+    - current_transactions: number of transactions used 
+    - transaction_interval: time window for the transaction limit
+    If the request fails, None is returned and an error message will be printed.
 
-    
+      
   Example
   ----------
   >>> check_map_key("your_personal_map_key")
@@ -38,7 +42,7 @@ def check_map_key(map_key):
       data = response.json()
       df = pd.Series(data)
       print(df)
-      return data
+      return data 
   
     else:
       print(f"Error in the query: HTTP {response.status_code}")
