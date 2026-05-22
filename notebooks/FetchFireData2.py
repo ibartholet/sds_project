@@ -21,30 +21,30 @@ def fetch_data(map_key):
   Parameters
   -----------
   map_key: str
+     This is the NASA FIRMS API key. This key is used to authenticate the request.
   
 
   Returns
   -----------
-  head of dataframe containg first 6 rows or None
-    If the request is successful, the head (first 6 rows) of the dataframe containing all the fires.
+  pd.DataFrame or None
+    If the request is successful, a Pandas DataFrame containing all the detected fires in the chosen region is returned. 
     If the request fails, an error message will be printed and None returned.
-
+  
   Example
   -----------
   >>> fetch_data("your_personal_map_key")
 
   """
 
-
   # define coordinates for region, here for South America (min_lon, min_lat, max_lon, max_lat)
-  region_coords = "-81.5,-55.0,-35.0,12.5"
+  region_coords = "-81.5,-55.0,-35.0,12.5" #these coordinates can easily be changed to a different region
 
   # choose the number of days (max. 7)
   days = 5
 
-  # define sensor and products
+  # define satellite sensor
   sensor = "VIIRS_NOAA20_NRT"
-  product = "fire"
+
 
   # define API endpoint url
   api_url = f"https://firms.modaps.eosdis.nasa.gov/api/area/csv/{map_key}/{sensor}/{region_coords}/{days}"
@@ -56,7 +56,7 @@ def fetch_data(map_key):
     print("Request successful\n")
 
     # read url and create dataframe
-    df_fire = pd.read_csv(StringIO(response.text)) # for only 1 api request instead of 2
+    df_fire = pd.read_csv(StringIO(response.text)) # StringIO converts text string into a virtual file object; pd.read_csv() is reading directly from RAM -> allows for 1 API call instead of 2
 
     ## if code does not work, due to too many fires; sample only x amount of rows by adjusting this line of code
     # if len(df_fire) > 1000:
@@ -67,7 +67,7 @@ def fetch_data(map_key):
     # For reproducibility current fires will be saved in a csv-file
     df_fire.to_csv("FIRMS_fire_data_today_minus5days.csv", index = False)
 
-    return(df_fire)
+    return df_fire
   
   elif response.status_code == 404:
     print(f"Error 404: Page not found")
