@@ -45,7 +45,7 @@ def check_map_key(map_key):
       print(response.text)
       return None
   
-  except Exception as e:
+  except Exception as e: 
   # possible error, wrong MAP_KEY value, check for extra quotes, missing letters
     print (f"There is an issue with the query: {e}\n try in your browser: {key_url}")
     return None
