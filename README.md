@@ -1,33 +1,42 @@
 ## **SDS210 Project - Wildfire Mapping in South America** ##
 
-#### **Project Title & Description**
-This project creates different layers displaying fires in South America. The different layers aim to answer where fires are located, how intense they burn, and which biomes are affected by the wildfires. 
-**maybe change this**
+*Author: Isabelle Bartholet*  
+*Date: 22.05.2026*
+
+Using near real-time data from NASA's Fire Information for Resource Management System (FIRMS), this project analyses active fire detections in South America. To do so, fire data from the past five days is fetched via the FIRMS API and visualized through timeanimated, interactive and thematic maps.
+
 
 #### **Data Sources** 
-Explicit links to where the raw open data was obtained.
+* **API map key:** The API Map Key can be generated on this page: https://firms.modaps.eosdis.nasa.gov/api/map_key/
+* **General API overview:** Link to the general FIRMS API overview page: https://firms.modaps.eosdis.nasa.gov/api/
+* **Area API:** Link to the specific FIRMS API for the area: https://firms.modaps.eosdis.nasa.gov/api/area/
+* Manual on how to use FIRMS API in Python: https://firms.modaps.eosdis.nasa.gov/content/academy/data_api/firms_api_use.html
+* Information on the attribute table: https://www.earthdata.nasa.gov/data/catalog/lancemodis-vj114imgtdl-nrt-2
+* **Shapefile for World Ecoregions:** A shapefile including information on ecoregions and biomes can be downloaded here: https://ecoregions.appspot.com/
+
+Last access date for all links: 22.05.2026
+
 
 #### **Setup Instructions**
 To create this project the software *VS Code* was used. However, it can also be executed using *JupiterLab*.
 
-The following libraries are required to run the code:
-- requests
-- pandas
-- geopandas
-- time
-- matplotlib.pyplot -> ist ein Modul aus einem Package
-- folium
-- contextily -> evtl. noch rausnehmen
-- cmcrameri -> evtl. noch rausnehmen
-- cartopy -> evtl. noch rausnehmen, Submodul
-- geodatasets -> evtl. noch rausnehmen, Package
+**Reproducing the Environment**
+To correctly execute, this project the following spatial software stack is required. In order to create the environment, please follow these steps:
+1. Ensure Conda is installed.
+2. Run: 'conda env create -f environment.yml'
+3. Activate: 'conda activate sds-env'
 
 
-**Execution Order of this project**
-1. Get access to the data: create a personal map key here XXX (for most recent data) and create an EarthData account here: xxx (for data older than 7 days)
-2. Run the Heatmap_SouthAmerica.ipynb notebook first. This shows the distribution and clustering of the fires in South America.
-3. Run the .ipynb notebook second. Here, a layer of Northern South America Fires is mapped
-4. Run the .ipynb. Now, a choropleth map of biomes is constructed. First, the data will be cleaned, then the choropleth map is programmed. In the end, the previously created maps will be combined to one single map with several layers to toggle on and off.
+####**Execution Order of this project**
+1. Make sure you are on the project branch. The project was set up on there, in case in future  more than one person would like to work on this project. 
+2. Get access to the data: Create a personal map key following the link provided above and insert it into the config.py file.
+3. Ensure that the files *access_mapkey.py* and *FetchFireData2.py* are in the same folder as the notebooks, which you want to run.
+4. Run the Heatmap_SouthAmerica.ipynb notebook first. This shows a timeanimated heatmap of the fire distribution and clustering in South America.
+5. Run the BiomeMap_SouthAmerica.ipynb notebook second. Here, the different biomes including the total fires per biomes are mapped in a choropleth map. 
+6. Lastly, execute the ThematicMap_SouthAmerica.ipynb which visualizes fire detections in Trinidad and Tobago. 
+
+
+
 
 
 
